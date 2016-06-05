@@ -124,8 +124,8 @@
 			</div>
       <div class="b-line">
         <div class="radio-button choise-1">
-          <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" />
-          <label for="radio-choice-1" class="credit-choise">
+          <input type="radio" name="radio-choise" id="radio-choise-1" value="1" />
+          <label for="radio-choise-1" class="credit-choise">
             <span class="choise-sp-1">
               1/<span name="credit_count_pl1">-</span>
             </span>
@@ -139,8 +139,8 @@
       </div>
       <div class="b-line">
         <div class="radio-button choise-2">
-          <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2" />
-          <label for="radio-choice-2" class="credit-choise">
+          <input type="radio" name="radio-choise" id="radio-choise-2" value="2" />
+          <label for="radio-choise-2" class="credit-choise">
             <span class="choise-sp-1">
               1/<span name="credit_count_pl2">-</span>
             </span>
@@ -154,8 +154,8 @@
       </div>
       <div class="b-line">
         <div class="radio-button choise-3">
-          <input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3" />
-          <label for="radio-choice-3" class="credit-choise">
+          <input type="radio" name="radio-choise" id="radio-choise-3" value="3" />
+          <label for="radio-choise-3" class="credit-choise">
             <span class="choise-sp-1">
               1/<span name="credit_count_pl3">-</span>
             </span>
@@ -267,12 +267,12 @@
           </svg>
         </div>
 				<label style="width: 80px;margin-top: 5px;">Дата выдачи</label>
-				<span class="b-inp"><input type="text" name="birth_day" id="birth_day" value="" class="inp inp-date-dd" maxlength="2" placeholder="ДД"></span>
-				<span class="b-inp"><input type="text" name="birth_month" id="birth_month" value="" class="inp inp-date-mm" maxlength="2" placeholder="ММ"></span>
-				<span class="b-inp"><input type="text" name="birth_year" id="birth_year" value="" class="inp inp-date-yy" maxlength="4" placeholder="РРРР"></span>
+				<span class="b-inp"><input type="text" name="pass_day" id="pass_day" value="" class="inp inp-date-dd" maxlength="2" placeholder="ДД"></span>
+				<span class="b-inp"><input type="text" name="pass_month" id="pass_month" value="" class="inp inp-date-mm" maxlength="2" placeholder="ММ"></span>
+				<span class="b-inp"><input type="text" name="pass_year" id="pass_year" value="" class="inp inp-date-yy" maxlength="4" placeholder="РРРР"></span>
 			</div>
-			<div class="b-line" style="height: 40px;">
-        <div class="icon pl-checkbox ready" style="margin: 0;">
+			<div class="b-line ready" style="height: 40px;">
+        <div class="icon pl-checkbox" style="margin: 0;">
           <svg width="1024" height="1024" viewBox="0 0 1024 1024">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
@@ -359,14 +359,13 @@
   		<div class="b-line" style="margin-top: 55px;">
         <div class = "center">
           <div class = "button-wrap">
-            <button class = "rad-button light gradient">Отправить заявку</button>
+            <button id="buyInCredit" class = "rad-button light gradient">Отправить заявку</button>
           </div>
         </div>
       </div>
 		</div>
 	</div>
 		
-<!-- BEGIN loading -->
 
 	<div id="page_loading">
 		<div class="b-result-all">
@@ -375,26 +374,25 @@
 		</div>
 	</div>
 		
-<!-- END loading -->
-<!-- BEGIN result -->
 
 	<div id="page_result_error">
 		<div class="b-result-all">
 			<div class="b-header b-header-error">Не удалось отправить заявку</div>
-			<div class="b-desc">
-				<a href="http://agents.kreditmarket.ua/partners/_general/v01/?uid=zeor1448550635683&amp;product_id=228200&amp;product_name=%D0%9D%D0%BE%D1%83%D1%82%D0%B1%D1%83%D0%BA%20Dell%20Latitude%203340%20(L33345NIL-11)&amp;product_price=14938&amp;product_url=http%3A%2F%2Fstylus.ua%2Fnoutbuki%2Fdell-latitude-3340-l33345nil-11.html">Попробуйте отправить заявку еще раз</a>
-			</div>
 		</div>
 	</div>
 	<div id="page_result_ok">
-		<div class="b-result-all">
-			<div class="b-header">ВАША заявка на кредит отправлена в «КредитМаркет»</div>
-			<div class="b-desc">
-				<p>В ближайшее время с Вами может связаться сотрудник компании!</p>
-				<p><strong class="bright">УДАЧНОГО ВАМ ДНЯ И ХОРОШЕГО НАСТРОЕНИЯ!</strong></p>
-			</div>
-		</div>
-	</div><!-- END result -->		
+    <div id="creditWindowId1" class="creditWindow" style=" margin-left:-350px;margin-top:-100px;">
+      <div id="creditTitle">
+        <span>Покупка в рассрочку</span>
+      </div>
+      <div style=" margin:15px;">Отправьте копии страниц паспорта, где есть отметки и ид. кода на credit@paylater.com.ua<br>Подойдут отсканированные копии или сфотографированные на мобильный телефон<br>В ближайшее время с Вами свяжется сотрудник магазина для уточнения заказа.</div>
+      <!--<div class="form-button-group">-->
+      <!--  <span class="button-group-half button-group-half-left">-->
+      <!--    <input type="button" class="button button-back" value="Закрыть" onclick="(new creditPayLater()).closeCredit('creditWindowId1')">-->
+      <!--  </span>-->
+      <!--</div>-->
+    </div>
+  </div>
 
 	</form>
 	<img src="img.jpg" style="width: 960px;"></img>
