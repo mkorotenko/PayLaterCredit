@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<title>Заявка на кредит в Кредитмаркет</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="./BuyInCredit_files/jquery-1.9.1.js"></script><style type="text/css"></style>
+	<script src="./BuyInCredit_files/jquery.maskedinput.min.js" type="text/javascript"></script>	
+	<script src="./BuyInCredit_files/calculator.js" type="text/javascript"></script>	
+	<script type="text/javascript" src="./BuyInCredit_files/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="./BuyInCredit_files/jquery.placeholder.min.js"></script>
+	<script type="text/javascript">
+
+		$(document).ready(function() { 
+				window.focus();
+				
+		});	
+
+		var eshopname="stylus";
+		var product_id="228200";
+		var product_name="Ноутбук Dell Latitude 3340 (L33345NIL-11)";
+		var product_url="http://stylus.ua/noutbuki/dell-latitude-3340-l33345nil-11.html";
+		
+		
+		var max_credit_sum="100000";
+		var min_credit_sum="400";
+		var price="14938";
+		var min_topay="0";
+
+		var credit_product="standard_2_5";
+		var credit_insurance="0";
+		var credit_komis_once="0";
+		var credit_komis_month="0.025";
+		
+		var min_age="21";
+		var max_age="67";
+		
+	</script>
+	
+	<link rel="stylesheet" media="screen" href="./BuyInCredit_files/styles.css">
+	<link rel="stylesheet" media="screen" href="./BuyInCredit_files/styles-list.css">
+
+  <!--[if lte IE 7]>
+    <div style='border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 90px; position: relative;'>
+      <div style='position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;'>
+        <a href='#' onclick='javascript:this.parentNode.parentNode.style.display="none"; return false;'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-cornerx.jpg' style='border: none;' alt='Скрыть уведомление'/></a>
+      </div>
+      <div style='width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: black;'>
+        <div style='width: 75px; float: left;'>
+          <img src='http://www.ie6nomore.com/files/theme/ie6nomore-warning.jpg' alt='Warning!'/>
+        </div>
+        <div style='width: 275px; float: left; font-family: Arial, sans-serif;'>
+          <div style='font-size: 14px; font-weight: bold; margin-top: 12px;'>Вы используете устаревший браузер</div>
+          <div style='font-size: 12px; margin-top: 6px; line-height: 12px;'>
+            Для более удобной работы с сайтом, пожалуйста, обновите ваш браузер.<br />
+            <b><a href= 'http://www.whatbrowser.org/ru/'>Что такое браузер?</a><br />
+            <a href='http://getbrowsers.com/ru/why/'>Зачем его обновлять?</a></b>
+          </div>
+        </div>
+        <div style='width: 75px; float: left;'>
+          <a href='http://www.mozilla-europe.org/ru/firefox/' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-firefox.jpg' style='border: none;' alt='Firefox 3.5'/></a>
+        </div>
+        <div style='width: 75px; float: left;'>
+          <a href='http://www.microsoft.com/rus/windows/internet-explorer/worldwide-sites.aspx' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-ie8.jpg' style='border: none;' alt='Internet Explorer 8'/></a>
+        </div>
+        <div style='width: 73px; float: left;'>
+          <a href='http://www.apple.com/ru/safari/download/' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-safari.jpg' style='border: none;' alt='Safari 4'/></a>
+        </div>
+        <div style='float: left;'>
+          <a href='http://www.google.com/chrome' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-chrome.jpg' style='border: none;' alt='Google Chrome'/></a>
+        </div>
+      </div>
+    </div>
+  <![endif]-->
+</head>
+<body>
+
+<div class="b-main-page ">
+	
+<form name="calcForm" id="calcForm" method="post" novalidate="novalidate">
+	<div class="b-main-top">
+		<div class="b-header">Покупай Сейчас - Плати Позже!</div>
+	</div>
+
+	<div id="page_form">
+		<div class="section-1 b-calc-0 pl-col">
+			<div class="pl-top">
+			  <div class="pl-extra">
+  				<span>1</span>
+			  </div>
+				<div class="pl-span">
+  				<span>Выбрать вариант рассрочки</span>
+				</div>
+			</div>
+      <div class="b-line">
+        <div class="radio-button choise-1">
+          <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" />
+          <label for="radio-choice-1" class="credit-choise">
+            <span class="choise-sp-1">
+              1/3
+            </span>
+            <div class="choise-sp-2">
+              <div>3 платежа</div>
+              <div>по <b>6 146</b> грн.</div>
+            </div>
+            <span class="choise-sp-3"></span>
+          </label>
+        </div>
+      </div>
+      <div class="b-line">
+        <div class="radio-button choise-2">
+          <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2" />
+          <label for="radio-choice-2" class="credit-choise">
+            <span class="choise-sp-1">
+              1/6
+            </span>
+            <div class="choise-sp-2">
+              <div>6 платежей</div>
+              <div>по <b>3 326</b> грн.</div>
+            </div>
+            <span class="choise-sp-3"></span>
+          </label>
+        </div>
+      </div>
+      <div class="b-line">
+        <div class="radio-button choise-3">
+          <input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3" />
+          <label for="radio-choice-3" class="credit-choise">
+            <span class="choise-sp-1">
+              1/10
+            </span>
+            <div class="choise-sp-2">
+              <div>10 платежей</div>
+              <div>по <b>2 262</b> грн.</div>
+            </div>
+            <span class="choise-sp-3"></span>
+          </label>
+        </div>
+      </div>
+      <div class="b-line" style="height: 164px;">
+        <p class="pl-text" style="margin-top: 40px;">
+          Рассрочка оформляется на безналичную стоимость выбранного товара:
+        </p>
+        <p class="pl-text pl-extra-amount">
+          <font color="#8EB085">16965</font> грн.
+        </p>
+      </div>
+      <div class="b-line">
+        <a href="#" target="_blank" id="personal_info">Скачать текст</a>
+        <span> договора рассрочки</span><br>
+        <span>или</span><br>
+        <a href="#" target="_blank" id="personal_info1">Задать вопрос</a>
+        <span> консультанту</span>
+      </div>
+		</div>
+
+		<div class="section-2 section-2-0 pl-col">
+			<div class="pl-top">
+			  <div class="pl-extra">
+  				<span>2</span>
+			  </div>
+				<div class="pl-span" style="padding-top: 27px;">
+  				<span>Заполнить данные</span>
+				</div>
+			</div>
+			<div class="b-line">
+        <div class="icon pl-checkbox ready">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.0234375 0.0234375)">
+              <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
+            </g>
+          </svg>
+        </div>
+        <span class="b-inp"><input type="text" name="phone" id="phone" value="" class="inp" placeholder="+380 (66) 333-22-44"></span>
+			</div>
+			<div class="b-line">
+        <div class="icon pl-checkbox">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.0234375 0.0234375)">
+              <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
+            </g>
+          </svg>
+        </div>
+				<div class="b-cell">
+					<span class="b-inp"><input type="text" name="lastname" id="lastname" value="" class="inp" maxlength="50" placeholder="Фамилия"></span>
+				</div>
+			</div>
+			<div class="b-fio">
+        <div class="icon pl-checkbox">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.0234375 0.0234375)">
+              <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
+            </g>
+          </svg>
+        </div>
+				<div class="b-cell">
+					<span class="b-inp"><input type="text" name="firstname" id="firstname" value="" class="inp inp-name" maxlength="50" placeholder="Имя"></span>
+				</div>
+				<div class="b-cell">
+					<span class="b-inp"><input type="text" name="secondname" id="secondname" value="" class="inp inp-sname" maxlength="50" placeholder="Отчество"></span>
+				</div>
+			</div>
+			<div class="b-line pl-section-doc">
+        <div class="icon pl-checkbox">
+        </div>
+			  <p>Необходимые документы:</p>
+			</div>
+			<div class="b-line">
+        <div class="icon pl-checkbox">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.0234375 0.0234375)">
+              <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
+            </g>
+          </svg>
+        </div>
+				<label>Идентификационный код</label>
+				<span class="b-inp"><input type="text" name="inn" id="inn" value="" class="inp inp-inn" maxlength="10" placeholder="0123456789"></span>
+			</div>
+			<div class="b-line">
+        <div class="icon pl-checkbox">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.0234375 0.0234375)">
+              <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
+            </g>
+          </svg>
+        </div>
+				<label style="width: 80px;">Паспорт Украины</label>
+				<span class="b-inp"><input type="text" name="pas" id="pas" value="" class="inp inp-pas-s" maxlength="10" placeholder="НН"></span>
+				<span class="b-inp"><input type="text" name="pas" id="pas" value="" class="inp inp-pas-num" maxlength="10" placeholder="66778844"></span>
+			</div>
+			<div class="b-line">
+        <div class="icon pl-checkbox">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.0234375 0.0234375)">
+              <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
+            </g>
+          </svg>
+        </div>
+				<label style="width: 80px;margin-top: 5px;">Дата выдачи</label>
+				<span class="b-inp"><input type="text" name="birth_day" id="birth_day" value="" class="inp inp-date-dd" maxlength="2" placeholder="ДД"></span>
+				<span class="b-inp"><input type="text" name="birth_month" id="birth_month" value="" class="inp inp-date-mm" maxlength="2" placeholder="ММ"></span>
+				<span class="b-inp"><input type="text" name="birth_year" id="birth_year" value="" class="inp inp-date-yy" maxlength="4" placeholder="РРРР"></span>
+			</div>
+			<div class="b-line" style="height: 40px;">
+        <div class="icon pl-checkbox" style="margin: 0;">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.0234375 0.0234375)">
+              <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
+            </g>
+          </svg>
+        </div>
+        <div style="padding-top: 5px;">
+  				<span class="b-inp">
+  				  <del>Справка о доходах</del>
+  				</span>
+  				<span class="b-inp" style="color:#8EB085">
+  				   не требуется
+  				</span>
+        </div>
+			</div>
+			<div class="b-line">
+        <div class="icon">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.03125 0.03125)">
+              <path d="M928 128h-288c0-70.692-57.306-128-128-128-70.692 0-128 57.308-128 128h-288c-17.672 0-32 14.328-32 32v832c0 17.674 14.328 32 32 32h832c17.674 0 32-14.326 32-32v-832c0-17.672-14.326-32-32-32zM512 64c35.346 0 64 28.654 64 64s-28.654 64-64 64c-35.346 0-64-28.654-64-64s28.654-64 64-64zM896 960h-768v-768h128v96c0 17.672 14.328 32 32 32h448c17.674 0 32-14.328 32-32v-96h128v768z"></path><path d="M448 858.51l-205.254-237.254 58.508-58.51 146.746 114.744 274.742-242.744 58.514 58.508z"></path>
+            </g>
+          </svg>
+        </div>
+        <span><input id="agree" name="agree" type="checkbox" checked="checked" style="display: none;"></span>
+				<span>Я даю согласие на обработку моих личных данных</span>
+			</div>
+		</div>
+		
+		<div class="section-3 pl-col">
+			<div class="pl-top">
+			  <div class="pl-extra">
+  				<span>3</span>
+			  </div>
+				<div class="pl-span" style="padding-top: 27px;">
+  				<span>Получить товар</span>
+				</div>
+			</div>
+  		<div class="b-line stage-desc">
+        <div class="icon">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.03125 0.03125)">
+              <path d="M704 640c-64 64-64 128-128 128s-128-64-192-128-128-128-128-192 64-64 128-128-128-256-192-256-192 192-192 192c0 128 131.5 387.5 256 512s384 256 512 256c0 0 192-128 192-192s-192-256-256-192z"></path>
+            </g>
+          </svg>
+        </div>
+  		  <p>
+  		    Через несколько минут Вам позвонит менеджер, для уточнения деталей.
+  		  </p>
+			</div>
+  		<div class="b-line stage-desc">
+        <div class="icon">
+          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+            <g transform="scale(0.03125 0.03125)">
+              <path d="M1024 576l-128-256h-192v-128c0-35.2-28.8-64-64-64h-576c-35.2 0-64 28.8-64 64v512l64 64h81.166c-10.898 18.832-17.166 40.678-17.166 64 0 70.692 57.308 128 128 128s128-57.308 128-128c0-23.322-6.268-45.168-17.166-64h354.334c-10.898 18.832-17.168 40.678-17.168 64 0 70.692 57.308 128 128 128s128-57.308 128-128c0-23.322-6.27-45.168-17.168-64h81.168v-192zM704 576v-192h132.668l96 192h-228.668z"></path>
+            </g>
+          </svg>
+        </div>
+  		  <p>
+  		    Товар отгружается со склада, оформляется доставка.
+  		  </p>
+			</div>
+  		<div class="b-line stage-desc">
+  		  <div class="icon">
+  		    <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+  		      <g transform="scale(0.03125 0.03125)">
+  		        <path d="M771.516 320c18.126-12.88 35.512-27.216 51.444-43.148 33.402-33.402 55.746-74.5 62.912-115.722 7.858-45.186-3.672-87.14-31.63-115.1-22.3-22.298-52.51-34.086-87.364-34.086-49.632 0-101.922 23.824-143.46 65.362-66.476 66.476-105.226 158.238-126.076 223.722-15.44-65.802-46.206-154.644-106.018-214.458-32.094-32.092-73.114-48.57-111.846-48.57-31.654 0-61.78 11.004-84.26 33.486-49.986 49.988-43.232 137.786 15.086 196.104 20.792 20.792 45.098 38.062 70.72 52.412h-217.024v256h64v448h768v-448.002h64v-256h-188.484zM674.326 128.218c27.724-27.724 62.322-44.274 92.55-44.274 10.7 0 25.708 2.254 36.45 12.998 26.030 26.028 11.412 86.308-31.28 128.998-43.946 43.946-103.060 74.168-154.432 94.060h-50.672c18.568-57.548 52.058-136.456 107.384-191.782zM233.934 160.89c-0.702-9.12-0.050-26.248 12.196-38.494 10.244-10.244 23.788-12.396 33.348-12.396v0c21.258 0 43.468 10.016 60.932 27.48 33.872 33.872 61.766 87.772 80.668 155.876 0.51 1.84 1.008 3.67 1.496 5.486-1.816-0.486-3.646-0.984-5.486-1.496-68.104-18.904-122.002-46.798-155.874-80.67-15.828-15.826-25.77-36.16-27.28-55.786zM448 960h-256v-416h256v416zM448 512h-320v-128h320v128zM832 960h-256v-416h256v416zM896 512h-320v-128h320v128z"></path>
+  		      </g>
+  		    </svg>
+  		  </div>
+  		  <p>
+  		    Доставку товара и договора рассрочки.
+  		  </p>
+			</div>
+  		<div class="">
+  		  <p>
+  		    При доставке товара вы подписываете <a href="#" target="_blank">Договор рассрочки</a> и <b>оплачиваете первый платеж</b> в соответствии с условиями выбранного вами пакета рассрочки.
+  		  </p>
+			</div>
+  		<div class="">
+  		  <p>
+  		    Остальные платежи вы оплачиваете <b>в любом банке</b>, начиная со следующего месяца в срок <b>до 20 числа</b>. Суммы платежей, указанные ниже, окончательные.
+  		  </p>
+			</div>
+  		<div class="b-line" style="margin-top: 55px;">
+        <div class = "center">
+          <div class = "button-wrap">
+            <button class = "rad-button light gradient">Отправить заявку</button>
+          </div>
+        </div>
+      </div>
+		</div>
+	</div>
+		
+<!-- BEGIN loading -->
+
+	<div id="page_loading">
+		<div class="b-result-all">
+			<div class="b-loading-pic"><img src="./BuyInCredit_files/loading.gif" border="0"></div>
+			<div class="b-loading-txt">Отправка данных...</div>
+		</div>
+	</div>
+		
+<!-- END loading -->
+<!-- BEGIN result -->
+
+	<div id="page_result_error">
+		<div class="b-result-all">
+			<div class="b-header b-header-error">Не удалось отправить заявку</div>
+			<div class="b-desc">
+				<a href="http://agents.kreditmarket.ua/partners/_general/v01/?uid=zeor1448550635683&amp;product_id=228200&amp;product_name=%D0%9D%D0%BE%D1%83%D1%82%D0%B1%D1%83%D0%BA%20Dell%20Latitude%203340%20(L33345NIL-11)&amp;product_price=14938&amp;product_url=http%3A%2F%2Fstylus.ua%2Fnoutbuki%2Fdell-latitude-3340-l33345nil-11.html">Попробуйте отправить заявку еще раз</a>
+			</div>
+		</div>
+	</div>
+	<div id="page_result_ok">
+		<div class="b-result-all">
+			<div class="b-header">ВАША заявка на кредит отправлена в «КредитМаркет»</div>
+			<div class="b-desc">
+				<p>В ближайшее время с Вами может связаться сотрудник компании!</p>
+				<p><strong class="bright">УДАЧНОГО ВАМ ДНЯ И ХОРОШЕГО НАСТРОЕНИЯ!</strong></p>
+			</div>
+		</div>
+	</div><!-- END result -->		
+
+	</form>
+	<img src="img.jpg" style="width: 960px;"></img>
+</div>
+
+</body></html>
