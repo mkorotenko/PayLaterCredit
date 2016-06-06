@@ -120,12 +120,10 @@ jQuery.validator.addMethod("validateTopay", function(value, element, params) {
 				validateNumber: true
 			},
 			passerr: {
-				required: true,
-				minlength: 2
+				required: true
 			},
 			pas: {
 				required: true,
-				minlength: 8,
 				validateNumber: true
 			},
 			pass_day: {
