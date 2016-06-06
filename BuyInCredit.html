@@ -4,27 +4,46 @@
 	
 	<title>Заявка на кредит в Кредитмаркет</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="./BuyInCredit_files/jquery-1.12.4.min.js"></script><style type="text/css"></style>
-	<script src="./BuyInCredit_files/jquery.maskedinput.min.js" type="text/javascript"></script>	
-	<script src="./BuyInCredit_files/calculator.js" type="text/javascript"></script>	
-	<script type="text/javascript" src="./BuyInCredit_files/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="./BuyInCredit_files/jquery.placeholder.min.js"></script>
+	<script src="lib/jquery-1.12.4.min.js"></script><style type="text/css"></style>
+	<script src="lib/jquery.maskedinput.min.js" type="text/javascript"></script>	
+	<script src="plCreditForm.js" type="text/javascript"></script>	
+	<script type="text/javascript" src="lib/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="lib/jquery.placeholder.min.js"></script>
 	<script type="text/javascript">
 
 		$(document).ready(function() { 
-				window.focus();
-				
+
+      $("#credit_pl1").text(recalculate(1,price));
+      $("[name='credit_count_pl1']").text(3);
+      $("#credit_pl2").text(recalculate(5,price));
+      $("[name='credit_count_pl2']").text(6);
+      $("#credit_pl3").text(recalculate(8,price));
+      $("[name='credit_count_pl3']").text(10);
+      $("#credit_pl4").text(Math.round(price));
+
+			window.focus();
 		});	
 
-		var eshopname="stylus";
-		var product_id="228200";
-		var product_name="Ноутбук Dell Latitude 3340 (L33345NIL-11)";
-		var product_url="http://stylus.ua/noutbuki/dell-latitude-3340-l33345nil-11.html";
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    
+    var url = window.location.href;
+    var shop = getParameterByName("shop_name", url);//"stylus"
+		//var product_id = getParameterByName("product_id", url);//"228200";
+		var product_name = getParameterByName("product_name", url);//"Ноутбук Dell Latitude 3340 (L33345NIL-11)";
+		var product_url = getParameterByName("product_url", url);//"http://stylus.ua/noutbuki/dell-latitude-3340-l33345nil-11.html";
 		
 		
-		var price="14938";
-		var max_credit_sum="100000";
-		var min_credit_sum="400";
+		var price = parseFloat(getParameterByName("product_price", url));//"14938";
+		var max_credit_sum="300000";
+		var min_credit_sum="1000";
 		var min_topay="0";
 
 		var credit_product="standard_2_5";
@@ -33,12 +52,21 @@
 		var credit_komis_month="0.025";
 		
 		var min_age="21";
-		var max_age="67";
+		var max_age="65";
 		
+  	function recalculate(plProg,val) {
+  		var prog = [0.9, 0.92, 0.85, 0.8, 0.8, 0.85, 0.9, 0.7, 0.75];
+  		var pcount = [3, 3   , 4   , 5  , 6  , 6   , 8  , 9  , 10];
+  
+  		var credit_sum=val;
+  		credit_sum=credit_sum.toFixed(2);
+  		
+  		return Math.floor((credit_sum/prog[plProg])/pcount[plProg]);
+  	}
+  	
 	</script>
 	
-	<link rel="stylesheet" media="screen" href="./BuyInCredit_files/styles.css">
-	<link rel="stylesheet" media="screen" href="./BuyInCredit_files/styles-list.css">
+	<link rel="stylesheet" media="screen" href="css/styles.css">
 
   <!--[if lte IE 7]>
     <div style='border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 90px; position: relative;'>
@@ -83,6 +111,7 @@
 	</div>
 
 	<div id="page_form">
+		
 		<div class="section-1 b-calc-0 pl-col">
 			<div class="pl-top">
 			  <div class="pl-extra">
@@ -94,14 +123,14 @@
 			</div>
       <div class="b-line">
         <div class="radio-button choise-1">
-          <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" />
-          <label for="radio-choice-1" class="credit-choise">
+          <input type="radio" name="radio-choise" id="radio-choise-1" value="1" />
+          <label for="radio-choise-1" class="credit-choise">
             <span class="choise-sp-1">
-              1/3
+              1/<span name="credit_count_pl1">-</span>
             </span>
             <div class="choise-sp-2">
-              <div>3 платежа</div>
-              <div>по <b>6 146</b> грн.</div>
+              <div><span name="credit_count_pl1">-</span> платежа</div>
+              <div>по <b><span id="credit_pl1">0</span></b> грн.</div>
             </div>
             <span class="choise-sp-3"></span>
           </label>
@@ -109,14 +138,14 @@
       </div>
       <div class="b-line">
         <div class="radio-button choise-2">
-          <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2" />
-          <label for="radio-choice-2" class="credit-choise">
+          <input type="radio" name="radio-choise" id="radio-choise-2" value="2" />
+          <label for="radio-choise-2" class="credit-choise">
             <span class="choise-sp-1">
-              1/6
+              1/<span name="credit_count_pl2">-</span>
             </span>
             <div class="choise-sp-2">
-              <div>6 платежей</div>
-              <div>по <b>3 326</b> грн.</div>
+              <div><span name="credit_count_pl2">-</span> платежей</div>
+              <div>по <b><span id="credit_pl2">0</span></b> грн.</div>
             </div>
             <span class="choise-sp-3"></span>
           </label>
@@ -124,14 +153,14 @@
       </div>
       <div class="b-line">
         <div class="radio-button choise-3">
-          <input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3" />
-          <label for="radio-choice-3" class="credit-choise">
+          <input type="radio" name="radio-choise" id="radio-choise-3" value="3" />
+          <label for="radio-choise-3" class="credit-choise">
             <span class="choise-sp-1">
-              1/10
+              1/<span name="credit_count_pl3">-</span>
             </span>
             <div class="choise-sp-2">
-              <div>10 платежей</div>
-              <div>по <b>2 262</b> грн.</div>
+              <div><span name="credit_count_pl3">-</span> платежей</div>
+              <div>по <b><span id="credit_pl3">0</span></b> грн.</div>
             </div>
             <span class="choise-sp-3"></span>
           </label>
@@ -142,7 +171,7 @@
           Рассрочка оформляется на безналичную стоимость выбранного товара:
         </p>
         <p class="pl-text pl-extra-amount">
-          <font color="#8EB085">16965</font> грн.
+          <font color="#8EB085"><span id="credit_pl4">0</span></font> грн.
         </p>
       </div>
       <div class="b-line">
@@ -164,7 +193,7 @@
 				</div>
 			</div>
 			<div class="b-line">
-        <div class="icon pl-checkbox ready">
+        <div class="icon pl-checkbox">
           <svg width="1024" height="1024" viewBox="0 0 1024 1024">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
@@ -225,8 +254,8 @@
           </svg>
         </div>
 				<label style="width: 80px;">Паспорт Украины</label>
-				<span class="b-inp"><input type="text" name="pas" id="pas" value="" class="inp inp-pas-s" maxlength="10" placeholder="НН"></span>
-				<span class="b-inp"><input type="text" name="pas" id="pas" value="" class="inp inp-pas-num" maxlength="10" placeholder="66778844"></span>
+				<span class="b-inp"><input type="text" name="passerr" id="passerr" value="" class="inp inp-pas-s" maxlength="2" placeholder="НН"></span>
+				<span class="b-inp"><input type="text" name="pas" id="pas" value="" class="inp inp-pas-num" maxlength="8" placeholder="66778844"></span>
 			</div>
 			<div class="b-line">
         <div class="icon pl-checkbox">
@@ -237,11 +266,11 @@
           </svg>
         </div>
 				<label style="width: 80px;margin-top: 5px;">Дата выдачи</label>
-				<span class="b-inp"><input type="text" name="birth_day" id="birth_day" value="" class="inp inp-date-dd" maxlength="2" placeholder="ДД"></span>
-				<span class="b-inp"><input type="text" name="birth_month" id="birth_month" value="" class="inp inp-date-mm" maxlength="2" placeholder="ММ"></span>
-				<span class="b-inp"><input type="text" name="birth_year" id="birth_year" value="" class="inp inp-date-yy" maxlength="4" placeholder="РРРР"></span>
+				<span class="b-inp"><input type="text" name="pass_day" id="pass_day" value="" class="inp inp-date-dd" maxlength="2" placeholder="ДД"></span>
+				<span class="b-inp"><input type="text" name="pass_month" id="pass_month" value="" class="inp inp-date-mm" maxlength="2" placeholder="ММ"></span>
+				<span class="b-inp"><input type="text" name="pass_year" id="pass_year" value="" class="inp inp-date-yy" maxlength="4" placeholder="РРРР"></span>
 			</div>
-			<div class="b-line" style="height: 40px;">
+			<div class="b-line ready" style="height: 40px;">
         <div class="icon pl-checkbox" style="margin: 0;">
           <svg width="1024" height="1024" viewBox="0 0 1024 1024">
             <g transform="scale(0.0234375 0.0234375)">
@@ -329,45 +358,43 @@
   		<div class="b-line" style="margin-top: 55px;">
         <div class = "center">
           <div class = "button-wrap">
-            <button class = "rad-button light gradient">Отправить заявку</button>
+            <button id="buyInCredit" class = "rad-button light gradient">Отправить заявку</button>
           </div>
         </div>
       </div>
 		</div>
 	</div>
 		
-<!-- BEGIN loading -->
 
 	<div id="page_loading">
 		<div class="b-result-all">
-			<div class="b-loading-pic"><img src="./BuyInCredit_files/loading.gif" border="0"></div>
+			<div class="b-loading-pic"><img src="loading.gif" border="0"></div>
 			<div class="b-loading-txt">Отправка данных...</div>
 		</div>
 	</div>
 		
-<!-- END loading -->
-<!-- BEGIN result -->
 
 	<div id="page_result_error">
 		<div class="b-result-all">
 			<div class="b-header b-header-error">Не удалось отправить заявку</div>
-			<div class="b-desc">
-				<a href="http://agents.kreditmarket.ua/partners/_general/v01/?uid=zeor1448550635683&amp;product_id=228200&amp;product_name=%D0%9D%D0%BE%D1%83%D1%82%D0%B1%D1%83%D0%BA%20Dell%20Latitude%203340%20(L33345NIL-11)&amp;product_price=14938&amp;product_url=http%3A%2F%2Fstylus.ua%2Fnoutbuki%2Fdell-latitude-3340-l33345nil-11.html">Попробуйте отправить заявку еще раз</a>
-			</div>
 		</div>
 	</div>
 	<div id="page_result_ok">
-		<div class="b-result-all">
-			<div class="b-header">ВАША заявка на кредит отправлена в «КредитМаркет»</div>
-			<div class="b-desc">
-				<p>В ближайшее время с Вами может связаться сотрудник компании!</p>
-				<p><strong class="bright">УДАЧНОГО ВАМ ДНЯ И ХОРОШЕГО НАСТРОЕНИЯ!</strong></p>
-			</div>
-		</div>
-	</div><!-- END result -->		
+    <div id="creditWindowId1" class="creditWindow">
+      <div id="creditTitle">
+        <span>Ваши данные успешно отправлены</span>
+      </div>
+      <div style=" margin:15px;">Отправьте копии страниц паспорта, где есть отметки и ид. кода на credit@paylater.com.ua<br>Подойдут отсканированные копии или сфотографированные на мобильный телефон<br>В ближайшее время с Вами свяжется сотрудник магазина для уточнения заказа.</div>
+      <!--<div class="form-button-group">-->
+      <!--  <span class="button-group-half button-group-half-left">-->
+      <!--    <input type="button" class="button button-back" value="Закрыть" onclick="(new creditPayLater()).closeCredit('creditWindowId1')">-->
+      <!--  </span>-->
+      <!--</div>-->
+    </div>
+  </div>
 
 	</form>
-	<img src="img.jpg" style="width: 960px;"></img>
+	<!--<img src="img.jpg" style="width: 960px;"></img>-->
 </div>
 
 </body></html>
