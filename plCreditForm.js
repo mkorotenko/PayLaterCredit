@@ -2,106 +2,49 @@
 $(function(){
 
 	$('input').placeholder();
-	jQuery("div").on('click','.tip',function(){jQuery(this).fadeOut();});
-    $(document).click(function() {
-        $(".js-select-list").hide();
-      
+	jQuery('input[name="radio-choise"]').click(function(){
+	  $("p","#credit_text").text($("div.choise-sp-2","label[for='radio-choise-"+$(this).val()+"']").text().replace(" ",""));
+	  checkEnableToSend();
+	});
+	jQuery("div.proc-data-agree").click(function(){
+	  $("#process_agree").css("display",dataProcessingAgree()? 'none':'block');
+	  checkEnableToSend();
+	});
+  function dataProcessingAgree() {
+    return $("#process_agree").css("display")!=='none';
+  }
+  function dataReady() {
+    var valid = validator,
+        result = true;
+    $('input', 'div.section-2').each(function(index,element){
+      if(result && !$(element.parentNode.parentNode).hasClass('ready')) result = false;
     });
-    function select(el) {
-        $(".js-select").each(function(){
-            var select_list = $(this).find(".js-select-list");
-            var text = select_list.find("li").first().text();
-
-			var curr_text=$(this).find(".js-select-input").val();
-
-            if (curr_text=='' || curr_text=='0') {
-				$(this).find(".js-select-text").text(text);
-			} else if(curr_text!=text){
-				$(this).find(".js-select-input").val(curr_text).change();
-			}
-			
-            $(this).click( function(event){
-                if ($(this).hasClass("is-active")) {
-                    $(this).removeClass("is-active");
-                    select_list.slideUp("fast");
-                }
-                else {
-                    $(".js-select").removeClass("is-active");
-                    $(".js-select-list").hide();
-                    select_list.slideDown("fast");
-                    $(this).addClass("is-active");
-                }
-                event.stopPropagation();
-            });
-            select_list.find("li").click(function(event) {
-                var id = $(this).attr("data-id");
-                var text = $(this).text();
-                $(this).parent().parent().find(".js-select-text").text(text);
-                $(this).parent().parent().find(".js-select-input").val(id).change();
-                $(this).parent().hide();
-                $(this).parents(".js-select").removeClass("is-active");
-				
-                event.stopPropagation();
-            });
-        });
+    return result;
+  }
+  function creditSelected() {
+    return !!$('[name="radio-choise"]:checked').val();
+  }
+  function checkEnableToSend() {
+    if(dataProcessingAgree() && dataReady() && creditSelected()) {
+      $("#buyInCredit").addClass('ready');
+      return true;
     }
-    $('.js-select').click(function(event){
-        event.stopPropagation();
-    });
-	select();
-	
+    else $("#buyInCredit").removeClass('ready');
+    return false;
+  }
 	$("#phone").mask("+380 (99) 999-99-99");
 	
-	
-function checkDate(month,day,year) {
-	var result=true;
-	var leap = 0;
-	if ((year % 4 === 0) || (year % 100 === 0) || (year % 400 === 0)) leap = 1;
-	if ((month === 1) && (leap === 1) && (day > 29)) result=false;
-	if ((month === 1) && (leap !== 1) && (day > 28)) result=false;
-	if (((month === 3) || (month === 5) || (month === 8) || (month === 10)) && (day === 31)) result=false;
-	return result;
-}
-
-jQuery.validator.addMethod("validateNumber", function(value, element) { 
-	if (value==="") return false; 
-	var RE = /^[0-9]+$/;
-	if (!RE.test(value)) return false; 
-	return true; 
-}, "Введите корректное число");
-	
-jQuery.validator.addMethod("validateTopay", function(value, element, params) { 
-	var ret=true;
-	var price=$("#price").val();
-	var credit_sum=parseFloat(price)-parseFloat(value);
-	var max_topay_val=parseFloat(price)-parseFloat(min_credit_sum);
-	if (max_topay_val<0) max_topay_val=0;
-	
-	var min_topay_val=min_topay;
-	if (credit_sum>max_credit_sum) min_topay_val=parseFloat(credit_sum)-parseFloat(max_credit_sum);
-	if (min_topay_val<min_topay) min_topay_val=min_topay;
-	
-	if (value>max_topay_val || value<min_topay_val) ret=false;
-
-	return ret; 
-	
-}, function(value, element, params) {
-	var price=$("#price").val();
-	var credit_sum=parseFloat(price)-parseFloat(value);
-	var max_topay_val=parseFloat(price)-parseFloat(min_credit_sum);
-	if (max_topay_val<0) max_topay_val=0;
-	
-	var min_topay_val=min_topay;
-	if (credit_sum>max_credit_sum) min_topay_val=parseFloat(credit_sum)-parseFloat(max_credit_sum);
-	if (min_topay_val<min_topay) min_topay_val=min_topay;
-	return jQuery.format("Первоначальный взнос может быть от {0} до {1} грн.",min_topay_val,max_topay_val);
-	});
-
-	
-	$("#calcForm").validate({
+	var validator = $("#creditForm").validate({
+    submitHandler: function(form) {
+      console.log('FORM READY');
+    },
 		ignore: ".ignore",
 		validClass: "ready",
 		rules: {
+			phone: {
+				required: true,
+				minlength: 10
+			},
 			firstname: {
 				required: true
 			},
@@ -109,74 +52,61 @@ jQuery.validator.addMethod("validateTopay", function(value, element, params) {
 				required: true
 			},
 			lastname: {
-				required: true
-			},
-			phone: {
 				required: true
 			},
 			inn: {
 				required: true,
 				minlength: 10,
-				validateNumber: true
+				digits: true
 			},
-			passerr: {
-				required: true
-			},
+		 	passerr: {
+		 		required: true,
+		 		minlength: 2
+		 	},
 			pas: {
 				required: true,
-				validateNumber: true
+				minlength: 6,
+				digits: true
 			},
 			pass_day: {
 				required: true,
-				validateNumber: true
+				digits: true
 			},
 			pass_month: {
 				required: true,
-				validateNumber: true
+				digits: true
 			},
 			pass_year: {
 				required: true,
 				minlength: 4,
-				validateNumber: true
+				digits: true
 			}
 		},
-		messages: {
-			firstname: {
-				required: "Введите Имя"
-			},
-			secondname: {
-				required: "Введите Отчество"
-			},
-			lastname: {
-				required: "Введите Фамилию"
-			},
-			phone: {
-				required: "Введите Телефон"
-			},
-			inn: {
-				required: "Введите идентиф. код",
-				minlength: "Некорректный идентиф. код",
-				validateNumber: "Некорректный идентиф. код"
-			},
-
-		},
     errorPlacement: function(error, element) {
-        //error.insertAfter(element)
-        //error.addClass('tip');  // add a class to the wrapper
-        //$(element[0].parentNode.parentNode).addClass('fail');
+      var cont = $(element[0].parentNode.parentNode);
+      cont.removeClass('ready').addClass('fail');
+    },
+    success: function(label, element) {
+      if($(element).hasClass('ignore')) return;
+      var cont = $(element.parentNode.parentNode),
+          needToCheck = !cont.hasClass('ready');
+      cont.removeClass('fail').addClass('ready');
+      if(needToCheck) checkEnableToSend();
     }
 	});
 
 	$("#buyInCredit").click(function(){
-
-		if ($("#calcForm").valid()) {
-			if (!$('[name="radio-choise"]:checked').val()) {
+    if(!checkEnableToSend()) return false;
+		if ($("#creditForm").valid()) {
+			if (!creditSelected()) {
 				alert("Необходимо выбрать вариант рассрочки.");
-			} else {
+			} else 
+			if (!dataProcessingAgree()) {
+				alert("Нужно дать согласие на обработку личных данных.");
+			}
+			else {
 				sendData();
 			}
-		} else {
-			//alert("nok");
 		}
 		return false;
 	});
@@ -273,8 +203,6 @@ jQuery.validator.addMethod("validateTopay", function(value, element, params) {
 			return x;
 		};
 
-    console.log(makeSoap12());
-    
   		jQuery.ajax("http://gw.ks840.in.ua:8083/loanonline.php?partnerid=01c0efd161aad5b68d5780a2183b190d", {
   			type:"POST",
   			data:makeSoap12(),

@@ -1,28 +1,17 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<title>Заявка на кредит в Кредитмаркет</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="lib/jquery-1.12.4.min.js"></script><style type="text/css"></style>
-	<script src="lib/jquery.maskedinput.min.js" type="text/javascript"></script>	
-	<script src="plCreditForm.js" type="text/javascript"></script>	
-	<script type="text/javascript" src="lib/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="lib/jquery.placeholder.min.js"></script>
-	<script type="text/javascript">
-
-		$(document).ready(function() { 
-
-      $("#credit_pl1").text(recalculate(1,price));
-      $("[name='credit_count_pl1']").text(3);
-      $("#credit_pl2").text(recalculate(5,price));
-      $("[name='credit_count_pl2']").text(6);
-      $("#credit_pl3").text(recalculate(8,price));
-      $("[name='credit_count_pl3']").text(10);
-      $("#credit_pl4").text(Math.round(price));
-
-			window.focus();
-		});	
+  	<title>Заявка на кредит в Кредитмаркет</title>
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<script src="lib/jquery-1.12.4.min.js"></script><style type="text/css"></style>
+  	<script src="lib/jquery.maskedinput.min.js" type="text/javascript"></script>	
+  	<script src="plCreditForm.js" type="text/javascript"></script>	
+  	<script type="text/javascript" src="lib/jquery.validate.min.js"></script>
+  	<script type="text/javascript" src="lib/jquery.placeholder.min.js"></script>
+  	<script type="text/javascript">
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -35,26 +24,16 @@
     }
     
     var url = window.location.href;
-    var shop = getParameterByName("shop_name", url);//"stylus"
-		//var product_id = getParameterByName("product_id", url);//"228200";
-		var product_name = getParameterByName("product_name", url);//"Ноутбук Dell Latitude 3340 (L33345NIL-11)";
-		var product_url = getParameterByName("product_url", url);//"http://stylus.ua/noutbuki/dell-latitude-3340-l33345nil-11.html";
+    var shop = getParameterByName("shop_name", url);
+		var product_name = getParameterByName("product_name", url);
+		var product_url = getParameterByName("product_url", url);
 		
+		var price = parseFloat(getParameterByName("product_price", url));
+		var email = getParameterByName("shop_email", url);
 		
-		var price = parseFloat(getParameterByName("product_price", url));//"14938";
-		var max_credit_sum="300000";
-		var min_credit_sum="1000";
-		var min_topay="0";
-
-		var credit_product="standard_2_5";
-		var credit_insurance="0";
-		var credit_komis_once="0";
-		var credit_komis_month="0.025";
-		
-		var min_age="21";
-		var max_age="65";
-		
-  	function recalculate(plProg,val) {
+  	function calcCredit(plProg,val) {
+  	  if(isNaN(val)) return 0;
+  	  
   		var prog = [0.9, 0.92, 0.85, 0.8, 0.8, 0.85, 0.9, 0.7, 0.75];
   		var pcount = [3, 3   , 4   , 5  , 6  , 6   , 8  , 9  , 10];
   
@@ -64,6 +43,23 @@
   		return Math.floor((credit_sum/prog[plProg])/pcount[plProg]);
   	}
   	
+
+		$(document).ready(function() { 
+
+      price = isNaN(price)? 0:price;
+      $("#credit_pl1").text(calcCredit(1,price));
+      $("[name='credit_count_pl1']").text(3);
+      $("#credit_pl2").text(calcCredit(5,price));
+      $("[name='credit_count_pl2']").text(6);
+      $("#credit_pl3").text(calcCredit(8,price));
+      $("[name='credit_count_pl3']").text(10);
+      $("#credit_pl4").text(Math.round(price));
+      
+      if(!!email) $("#email").text(email).attr("href", "mailto:"+email+"?subject=Копии документов на рассрочку");
+
+			window.focus();
+		});	
+
 	</script>
 	
 	<link rel="stylesheet" media="screen" href="css/styles.css">
@@ -105,7 +101,7 @@
 
 <div class="b-main-page ">
 	
-<form name="calcForm" id="calcForm" method="post" novalidate="novalidate">
+<form name="creditForm" id="creditForm" method="post" novalidate="novalidate">
 	<div class="b-main-top">
 		<div class="b-header">Покупай Сейчас - Плати Позже!</div>
 	</div>
@@ -132,7 +128,13 @@
               <div><span name="credit_count_pl1">-</span> платежа</div>
               <div>по <b><span id="credit_pl1">0</span></b> грн.</div>
             </div>
-            <span class="choise-sp-3"></span>
+            <span class="choise-sp-3">
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="32" height="52" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+              <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+              <path d="M1310 5109 c-165 -28 -298 -166 -317 -331 -5 -35 -6 -884 -3 -1888 l5 -1825 24 -60 c18 -44 42 -78 90 -126 87 -87 149 -112 277 -113 85 -1 94 1 165 36 63 32 113 74 329 277 140 132 258 236 261 233 3 -4 106 -241 229 -527 122 -286 233 -542 247 -568 86 -173 286 -257 470 -198 70 22 501 212 559 246 57 33 121 107 152 173 20 44 27 77 30 147 5 113 17 81 -282 734 -129 283 -234 517 -232 518 2 2 169 19 372 38 402 36 441 45 521 108 58 47 89 86 121 154 24 51 27 70 27 158 0 91 -3 106 -31 165 -17 36 -47 82 -65 102 -95 104 -2640 2474 -2684 2499 -81 47 -171 63 -265 48z m1438 -1669 c667 -624 1212 -1137 1212 -1140 0 -3 -269 -29 -597 -59 -329 -29 -608 -56 -619 -59 -21 -7 -1 -52 332 -782 195 -426 355 -781 357 -789 2 -15 -453 -223 -465 -212 -4 3 -159 361 -346 794 -187 433 -342 789 -346 790 -3 1 -202 -182 -443 -408 -240 -225 -440 -412 -445 -413 -4 -2 -8 798 -8 1778 l0 1782 78 -73 c43 -41 624 -585 1290 -1209z"></path>
+              </g>
+              </svg>              
+            </span>
           </label>
         </div>
       </div>
@@ -147,7 +149,13 @@
               <div><span name="credit_count_pl2">-</span> платежей</div>
               <div>по <b><span id="credit_pl2">0</span></b> грн.</div>
             </div>
-            <span class="choise-sp-3"></span>
+            <span class="choise-sp-3">
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="32" height="52" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+              <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+              <path d="M1310 5109 c-165 -28 -298 -166 -317 -331 -5 -35 -6 -884 -3 -1888 l5 -1825 24 -60 c18 -44 42 -78 90 -126 87 -87 149 -112 277 -113 85 -1 94 1 165 36 63 32 113 74 329 277 140 132 258 236 261 233 3 -4 106 -241 229 -527 122 -286 233 -542 247 -568 86 -173 286 -257 470 -198 70 22 501 212 559 246 57 33 121 107 152 173 20 44 27 77 30 147 5 113 17 81 -282 734 -129 283 -234 517 -232 518 2 2 169 19 372 38 402 36 441 45 521 108 58 47 89 86 121 154 24 51 27 70 27 158 0 91 -3 106 -31 165 -17 36 -47 82 -65 102 -95 104 -2640 2474 -2684 2499 -81 47 -171 63 -265 48z m1438 -1669 c667 -624 1212 -1137 1212 -1140 0 -3 -269 -29 -597 -59 -329 -29 -608 -56 -619 -59 -21 -7 -1 -52 332 -782 195 -426 355 -781 357 -789 2 -15 -453 -223 -465 -212 -4 3 -159 361 -346 794 -187 433 -342 789 -346 790 -3 1 -202 -182 -443 -408 -240 -225 -440 -412 -445 -413 -4 -2 -8 798 -8 1778 l0 1782 78 -73 c43 -41 624 -585 1290 -1209z"></path>
+              </g>
+              </svg>              
+            </span>
           </label>
         </div>
       </div>
@@ -162,7 +170,13 @@
               <div><span name="credit_count_pl3">-</span> платежей</div>
               <div>по <b><span id="credit_pl3">0</span></b> грн.</div>
             </div>
-            <span class="choise-sp-3"></span>
+            <span class="choise-sp-3">
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="32" height="52" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+              <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+              <path d="M1310 5109 c-165 -28 -298 -166 -317 -331 -5 -35 -6 -884 -3 -1888 l5 -1825 24 -60 c18 -44 42 -78 90 -126 87 -87 149 -112 277 -113 85 -1 94 1 165 36 63 32 113 74 329 277 140 132 258 236 261 233 3 -4 106 -241 229 -527 122 -286 233 -542 247 -568 86 -173 286 -257 470 -198 70 22 501 212 559 246 57 33 121 107 152 173 20 44 27 77 30 147 5 113 17 81 -282 734 -129 283 -234 517 -232 518 2 2 169 19 372 38 402 36 441 45 521 108 58 47 89 86 121 154 24 51 27 70 27 158 0 91 -3 106 -31 165 -17 36 -47 82 -65 102 -95 104 -2640 2474 -2684 2499 -81 47 -171 63 -265 48z m1438 -1669 c667 -624 1212 -1137 1212 -1140 0 -3 -269 -29 -597 -59 -329 -29 -608 -56 -619 -59 -21 -7 -1 -52 332 -782 195 -426 355 -781 357 -789 2 -15 -453 -223 -465 -212 -4 3 -159 361 -346 794 -187 433 -342 789 -346 790 -3 1 -202 -182 -443 -408 -240 -225 -440 -412 -445 -413 -4 -2 -8 798 -8 1778 l0 1782 78 -73 c43 -41 624 -585 1290 -1209z"></path>
+              </g>
+              </svg>              
+            </span>
           </label>
         </div>
       </div>
@@ -194,7 +208,7 @@
 			</div>
 			<div class="b-line">
         <div class="icon pl-checkbox">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+          <svg width="30" height="30" viewBox="0 0 30 30">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
             </g>
@@ -204,30 +218,24 @@
 			</div>
 			<div class="b-line">
         <div class="icon pl-checkbox">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+          <svg width="30" height="30" viewBox="0 0 30 30">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
             </g>
           </svg>
         </div>
-				<div class="b-cell">
-					<span class="b-inp"><input type="text" name="lastname" id="lastname" value="" class="inp" maxlength="50" placeholder="Фамилия"></span>
-				</div>
+				<span class="b-inp"><input type="text" name="lastname" id="lastname" value="" class="inp" maxlength="50" placeholder="Фамилия"></span>
 			</div>
 			<div class="b-fio">
         <div class="icon pl-checkbox">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+          <svg width="30" height="30" viewBox="0 0 30 30">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
             </g>
           </svg>
         </div>
-				<div class="b-cell">
-					<span class="b-inp"><input type="text" name="firstname" id="firstname" value="" class="inp inp-name" maxlength="50" placeholder="Имя"></span>
-				</div>
-				<div class="b-cell">
-					<span class="b-inp"><input type="text" name="secondname" id="secondname" value="" class="inp inp-sname" maxlength="50" placeholder="Отчество"></span>
-				</div>
+				<span class="b-inp"><input type="text" name="firstname" id="firstname" value="" class="inp inp-name" maxlength="50" placeholder="Имя"></span>
+				<span class="b-inp"><input type="text" name="secondname" id="secondname" value="" class="inp inp-sname" maxlength="50" placeholder="Отчество"></span>
 			</div>
 			<div class="b-line pl-section-doc">
         <div class="icon pl-checkbox">
@@ -236,7 +244,7 @@
 			</div>
 			<div class="b-line">
         <div class="icon pl-checkbox">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+          <svg width="30" height="30" viewBox="0 0 30 30">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
             </g>
@@ -247,32 +255,32 @@
 			</div>
 			<div class="b-line">
         <div class="icon pl-checkbox">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+          <svg width="30" height="30" viewBox="0 0 30 30">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
             </g>
           </svg>
         </div>
 				<label style="width: 80px;">Паспорт Украины</label>
-				<span class="b-inp"><input type="text" name="passerr" id="passerr" value="" class="inp inp-pas-s" maxlength="2" placeholder="НН"></span>
-				<span class="b-inp"><input type="text" name="pas" id="pas" value="" class="inp inp-pas-num" minlength="6" maxlength="8" placeholder="667788"></span>
+				<span class="b-inp"><input type="text" name="passerr" id="passerr" value="" class="inp inp-pas-s ignore" maxlength="2" placeholder="НН"></span>
+				<span class="b-inp"><input type="text" name="pas" id="pas" value="" class="inp inp-pas-num" maxlength="6" placeholder="667788"></span>
 			</div>
 			<div class="b-line">
         <div class="icon pl-checkbox">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+          <svg width="30" height="30" viewBox="0 0 30 30">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
             </g>
           </svg>
         </div>
 				<label style="width: 80px;margin-top: 5px;">Дата выдачи</label>
-				<span class="b-inp"><input type="text" name="pass_day" id="pass_day" value="" class="inp inp-date-dd" maxlength="2" placeholder="ДД"></span>
-				<span class="b-inp"><input type="text" name="pass_month" id="pass_month" value="" class="inp inp-date-mm" maxlength="2" placeholder="ММ"></span>
+				<span class="b-inp"><input type="text" name="pass_day" id="pass_day" value="" class="inp inp-date-dd ignore" maxlength="2" placeholder="ДД"></span>
+				<span class="b-inp"><input type="text" name="pass_month" id="pass_month" value="" class="inp inp-date-mm ignore" maxlength="2" placeholder="ММ"></span>
 				<span class="b-inp"><input type="text" name="pass_year" id="pass_year" value="" class="inp inp-date-yy" maxlength="4" placeholder="РРРР"></span>
 			</div>
 			<div class="b-line ready" style="height: 40px;">
         <div class="icon pl-checkbox" style="margin: 0;">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+          <svg width="30" height="30" viewBox="0 0 30 30">
             <g transform="scale(0.0234375 0.0234375)">
               <path d="M512 42.667q95.667 0 182.5 37.167t149.667 100 100 149.667 37.167 182.5-37.167 182.5-100 149.667-149.667 100-182.5 37.167-182.5-37.167-149.667-100-100-149.667-37.167-182.5 37.167-182.5 100-149.667 149.667-100 182.5-37.167zM512 128q-78 0-149.167 30.5t-122.5 81.833-81.833 122.5-30.5 149.167 30.5 149.167 81.833 122.5 122.5 81.833 149.167 30.5 149.167-30.5 122.5-81.833 81.833-122.5 30.5-149.167-30.5-149.167-81.833-122.5-122.5-81.833-149.167-30.5zM655.667 383.667q17.667 0 30.167 12.5t12.5 30.167-12.667 30.333l-181 181q-12.333 12.333-30 12.333-18 0-30.333-12.333l-90.667-90.333q-12.333-12.333-12.333-30.333 0-17.667 12.5-30.167t30.167-12.5 30.333 12.667l60.333 60.333 150.667-151q12.667-12.667 30.333-12.667z"></path>
             </g>
@@ -287,15 +295,14 @@
   				</span>
         </div>
 			</div>
-			<div class="b-line">
+			<div class="b-line proc-data-agree">
         <div class="icon">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
+          <svg width="30" height="40" viewBox="0 0 30 40">
             <g transform="scale(0.03125 0.03125)">
-              <path d="M928 128h-288c0-70.692-57.306-128-128-128-70.692 0-128 57.308-128 128h-288c-17.672 0-32 14.328-32 32v832c0 17.674 14.328 32 32 32h832c17.674 0 32-14.326 32-32v-832c0-17.672-14.326-32-32-32zM512 64c35.346 0 64 28.654 64 64s-28.654 64-64 64c-35.346 0-64-28.654-64-64s28.654-64 64-64zM896 960h-768v-768h128v96c0 17.672 14.328 32 32 32h448c17.674 0 32-14.328 32-32v-96h128v768z"></path><path d="M448 858.51l-205.254-237.254 58.508-58.51 146.746 114.744 274.742-242.744 58.514 58.508z"></path>
+              <path d="M928 128h-288c0-70.692-57.306-128-128-128-70.692 0-128 57.308-128 128h-288c-17.672 0-32 14.328-32 32v832c0 17.674 14.328 32 32 32h832c17.674 0 32-14.326 32-32v-832c0-17.672-14.326-32-32-32zM512 64c35.346 0 64 28.654 64 64s-28.654 64-64 64c-35.346 0-64-28.654-64-64s28.654-64 64-64zM896 960h-768v-768h128v96c0 17.672 14.328 32 32 32h448c17.674 0 32-14.328 32-32v-96h128v768z"></path><path id="process_agree" style="display:block;" d="M448 858.51l-205.254-237.254 58.508-58.51 146.746 114.744 274.742-242.744 58.514 58.508z"></path>
             </g>
           </svg>
         </div>
-        <span><input id="agree" name="agree" type="checkbox" checked="checked" style="display: none;"></span>
 				<span>Я даю согласие на обработку моих личных данных</span>
 			</div>
 		</div>
@@ -311,11 +318,7 @@
 			</div>
   		<div class="b-line stage-desc">
         <div class="icon">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
-            <g transform="scale(0.03125 0.03125)">
-              <path d="M704 640c-64 64-64 128-128 128s-128-64-192-128-128-128-128-192 64-64 128-128-128-256-192-256-192 192-192 192c0 128 131.5 387.5 256 512s384 256 512 256c0 0 192-128 192-192s-192-256-256-192z"></path>
-            </g>
-          </svg>
+          <img src='images\rassrochka_v2.2_12.png'></img>
         </div>
   		  <p>
   		    Через несколько минут Вам позвонит менеджер, для уточнения деталей.
@@ -323,11 +326,7 @@
 			</div>
   		<div class="b-line stage-desc">
         <div class="icon">
-          <svg width="1024" height="1024" viewBox="0 0 1024 1024">
-            <g transform="scale(0.03125 0.03125)">
-              <path d="M1024 576l-128-256h-192v-128c0-35.2-28.8-64-64-64h-576c-35.2 0-64 28.8-64 64v512l64 64h81.166c-10.898 18.832-17.166 40.678-17.166 64 0 70.692 57.308 128 128 128s128-57.308 128-128c0-23.322-6.268-45.168-17.166-64h354.334c-10.898 18.832-17.168 40.678-17.168 64 0 70.692 57.308 128 128 128s128-57.308 128-128c0-23.322-6.27-45.168-17.168-64h81.168v-192zM704 576v-192h132.668l96 192h-228.668z"></path>
-            </g>
-          </svg>
+          <img src='images\rassrochka_v2.2_12-06.png'></img>
         </div>
   		  <p>
   		    Товар отгружается со склада, оформляется доставка.
@@ -335,11 +334,7 @@
 			</div>
   		<div class="b-line stage-desc">
   		  <div class="icon">
-  		    <svg width="1024" height="1024" viewBox="0 0 1024 1024">
-  		      <g transform="scale(0.03125 0.03125)">
-  		        <path d="M771.516 320c18.126-12.88 35.512-27.216 51.444-43.148 33.402-33.402 55.746-74.5 62.912-115.722 7.858-45.186-3.672-87.14-31.63-115.1-22.3-22.298-52.51-34.086-87.364-34.086-49.632 0-101.922 23.824-143.46 65.362-66.476 66.476-105.226 158.238-126.076 223.722-15.44-65.802-46.206-154.644-106.018-214.458-32.094-32.092-73.114-48.57-111.846-48.57-31.654 0-61.78 11.004-84.26 33.486-49.986 49.988-43.232 137.786 15.086 196.104 20.792 20.792 45.098 38.062 70.72 52.412h-217.024v256h64v448h768v-448.002h64v-256h-188.484zM674.326 128.218c27.724-27.724 62.322-44.274 92.55-44.274 10.7 0 25.708 2.254 36.45 12.998 26.030 26.028 11.412 86.308-31.28 128.998-43.946 43.946-103.060 74.168-154.432 94.060h-50.672c18.568-57.548 52.058-136.456 107.384-191.782zM233.934 160.89c-0.702-9.12-0.050-26.248 12.196-38.494 10.244-10.244 23.788-12.396 33.348-12.396v0c21.258 0 43.468 10.016 60.932 27.48 33.872 33.872 61.766 87.772 80.668 155.876 0.51 1.84 1.008 3.67 1.496 5.486-1.816-0.486-3.646-0.984-5.486-1.496-68.104-18.904-122.002-46.798-155.874-80.67-15.828-15.826-25.77-36.16-27.28-55.786zM448 960h-256v-416h256v416zM448 512h-320v-128h320v128zM832 960h-256v-416h256v416zM896 512h-320v-128h320v128z"></path>
-  		      </g>
-  		    </svg>
+          <img src='images\rassrochka_v2.2_12-08.png'></img>
   		  </div>
   		  <p>
   		    Доставку товара и договора рассрочки.
@@ -347,18 +342,21 @@
 			</div>
   		<div class="">
   		  <p>
-  		    При доставке товара вы подписываете <a href="#" target="_blank">Договор рассрочки</a> и <b>оплачиваете первый платеж</b> в соответствии с условиями выбранного вами пакета рассрочки.
+  		    Перед отгрузкой вы <b>оплачиваете первый платеж</b> и при доставке товара подписываете договор рассрочки в соответствии с условиями выбранного вами пакета рассрочки.
   		  </p>
 			</div>
   		<div class="">
   		  <p>
-  		    Остальные платежи вы оплачиваете <b>в любом банке</b>, начиная со следующего месяца в срок <b>до 20 числа</b>. Суммы платежей, указанные ниже, окончательные.
+  		    Остальные платежи вы оплачиваете <b>в любом банке</b>, начиная со следующего месяца в срок <b>до 20 числа</b>. Указанные суммы платежей - окончательные.
   		  </p>
 			</div>
-  		<div class="b-line" style="margin-top: 55px;">
+      <div class="b-line" id="credit_text">
+        <p style="font-size: 20px;padding: 15px 0 0 0;"></p>
+			</div>
+			<div class="b-line">
         <div class = "center">
           <div class = "button-wrap">
-            <button id="buyInCredit" class = "rad-button light gradient">Отправить заявку</button>
+            <button id="buyInCredit" class = "rad-button light gradient"><span style="border-bottom: 1px solid;">Отправить заявку</span></button>
           </div>
         </div>
       </div>
@@ -368,7 +366,7 @@
 
 	<div id="page_loading">
 		<div class="b-result-all">
-			<div class="b-loading-pic"><img src="loading.gif" border="0"></div>
+			<div class="b-loading-pic"><img src="loading.gif" border="0" style="width: 50px;"></div>
 			<div class="b-loading-txt">Отправка данных...</div>
 		</div>
 	</div>
@@ -384,7 +382,7 @@
       <div id="creditTitle">
         <span>Ваши данные успешно отправлены</span>
       </div>
-      <div style=" margin:15px;">Отправьте копии страниц паспорта, где есть отметки и ид. кода на credit@paylater.com.ua<br>Подойдут отсканированные копии или сфотографированные на мобильный телефон<br>В ближайшее время с Вами свяжется сотрудник магазина для уточнения заказа.</div>
+      <div style=" margin:15px;">Отправьте копии страниц паспорта, где есть отметки и ид. кода на <a id="email" href="mailto:credit@paylater.com.ua?subject=Копии документов на рассрочку" target="_blank">credit@paylater.com.ua</a><br>Подойдут отсканированные копии или сфотографированные на мобильный телефон<br>В ближайшее время с Вами свяжется сотрудник магазина для уточнения заказа.</div>
       <!--<div class="form-button-group">-->
       <!--  <span class="button-group-half button-group-half-left">-->
       <!--    <input type="button" class="button button-back" value="Закрыть" onclick="(new creditPayLater()).closeCredit('creditWindowId1')">-->
@@ -392,9 +390,7 @@
       <!--</div>-->
     </div>
   </div>
-
 	</form>
-	<!--<img src="img.jpg" style="width: 960px;"></img>-->
 </div>
 
 </body></html>

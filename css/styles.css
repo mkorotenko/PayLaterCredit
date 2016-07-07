@@ -176,7 +176,7 @@ input.error {	border: 1px solid #f59595 !important;}
 }
 
 .b-result-all .b-loading-pic {padding:90px 0px 0px 0px; }
-.b-result-all .b-loading-txt {padding:15px 0px 0px 0px;font-size:18px;color: #591a80; }
+.b-result-all .b-loading-txt {padding:15px 0px 0px 0px;font-size:18px;color: #4f9a4e;}
 .b-result-all .b-header {font-size:18px; padding:60px 0px 30px 0px;color: #591a80;}
 .b-result-all .b-header-error {color: #f06666;}
 .b-result-all .b-desc {padding:0px 0px 0px 0px;}
@@ -233,8 +233,8 @@ div.icon{
 svg{
   fill: currentColor;
 }
-.ready .icon{color: #74A50E;}
-.fail .icon{color: #F7783F;}
+.ready .icon {color: #4f9a4e;}
+.fail .icon {color: #F7783F;}
 
 .choise-1 .credit-choise {
   border: 1px solid #34C9DC;
@@ -263,15 +263,25 @@ svg{
 .choise-3 .credit-choise .choise-sp-3{
   background-color: #74A50E;
 }
+.credit-choise .choise-sp-3{
+  color: rgba(0,0,0,0.2);
+}
 
 .choise-1.radio-button input[type=radio]:checked + label {
   background-color: #34C9DC;
+  color: #ffffff;
 }
 .choise-2.radio-button input[type=radio]:checked + label {
   background-color: #F9A60C;
+  color: #ffffff;
 }
 .choise-3.radio-button input[type=radio]:checked + label {
   background-color: #74A50E;
+  color: #ffffff;
+}
+
+.radio-button input[type=radio]:checked + label span {
+  color: #ffffff;
 }
 
 .radio-button {
@@ -308,13 +318,13 @@ input[type="checkbox"] + label, input[type="radio"] + label {
   border: none;
   background: none;
   font-family: 'Roboto', sans-serif;
-  width: 250px;
+  width: 270px;
   height: 50px;
   cursor: pointer;
   transition: 0.1s all ease;
   font-size: 16px;
-  font-weight: 300;
-  color: #777;
+  font-weight: 600;
+  color: #fff;
   border-bottom: 1px solid #ccc;
   box-shadow: 0px 0px 0px 0px #B8B8B8;
 }
@@ -336,21 +346,39 @@ input[type="checkbox"] + label, input[type="radio"] + label {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#e0e0e0', GradientType=0);
   /* IE6-9 */
 }
-.rad-button:focus {
+.rad-button.ready {
+  background: #b7e7b6;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #b7e7b6 0%, #53a252 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b7e7b6), color-stop(100%, #53a252));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #b7e7b6 0%, #53a252 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #b7e7b6 0%, #53a252 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #b7e7b6 0%, #53a252 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #b7e7b6 0%, #53a252 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7e7b6', endColorstr='#53a252', GradientType=0);
+  /* IE6-9 */
+}
+.rad-button.ready:focus {
   outline: 0;
 }
-.rad-button:hover {
+.rad-button.ready:hover {
   background-color: #f5f5f5;
   top: -2px;
   height: 52px;
   border-bottom: 4px solid #ccc;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
 }
-.rad-button:hover.static {
+.rad-button.ready:hover.static {
   top: 0px;
   height: 50px;
 }
-.rad-button:active {
+.rad-button.ready:active {
   top: 0px;
   height: 50px;
   border: 1px solid #ccc;
@@ -361,15 +389,13 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 .creditWindow {
     position: fixed;
     border: 1px solid gray;
-    background: #fff;
-    color: #000;
     padding: 10px;
-    top: 50%;
+    top: 25%;
     left: 50%;
-    margin-top: -300px;
-    margin-left: -325px;
-    font-family: 'Open Sans',sans-serif;
-    z-index: 2147483646;
+    margin-top: -100px;
+    margin-left: -270px;
+    /* font-family: 'Open Sans',sans-serif; */
+    z-index: 1000;
 }
 #creditTitle {
     text-align: center;
@@ -380,4 +406,7 @@ input[type="checkbox"] + label, input[type="radio"] + label {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 5px;
+}
+.proc-data-agree {
+  cursor: pointer;
 }
